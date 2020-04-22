@@ -6,6 +6,10 @@ public class DAOImple implements DAO {
 	private Product[] datas;
 	private int cnt;
 
+	public DAOImple() {
+		// TODO Auto-generated constructor stub
+		datas = new Product[30];
+	}
 	@Override
 	public void insert(Product p) {
 		// TODO Auto-generated method stub
@@ -41,15 +45,15 @@ public class DAOImple implements DAO {
 	@Override
 	public Product[] selectByName(String name) {
 		// TODO Auto-generated method stub
-		int i = 0;
+		int j = 0;
 		Product[] x = new Product[cnt];
-		for (Product p : datas) {
-			if (p.getName().equals(name)) {
-				x[i++] = p;
+		for (int i = 0; i < cnt; i++) {
+			if (datas[i].getName().equals(name)) {
+				x[j++] = datas[i];
 			}
 		}
-		Product[] y = new Product[i];
-		System.arraycopy(x, 0, y, 0, i);
+		Product[] y = new Product[j];
+		System.arraycopy(x, 0, y, 0, j);
 		return y;
 	}
 
@@ -57,7 +61,7 @@ public class DAOImple implements DAO {
 	public Product[] selectAll() {
 		// TODO Auto-generated method stub
 		Product[] x = new Product[cnt];
-		System.arraycopy(datas, 0, x, 0, datas.length);
+		System.arraycopy(datas, 0, x, 0, cnt);
 		return x;
 	}
 

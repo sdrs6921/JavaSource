@@ -13,11 +13,12 @@ public class ServiceImpl_prod implements Service {
 	@Override
 	public void addProduct(Scanner sc) {
 		// TODO Auto-generated method stub
-		System.out.print("name:");
+		System.out.println("제품을 추가합니다");
+		System.out.print("제품명 :");
 		String name = sc.next();
-		System.out.print("price:");
+		System.out.print("가격 :");
 		int price = sc.nextInt();
-		System.out.print("amount:");
+		System.out.print("수량 :");
 		int amount = sc.nextInt();
 		
 		dao.insert(new Product(name, price, amount));
@@ -28,14 +29,19 @@ public class ServiceImpl_prod implements Service {
 		// TODO Auto-generated method stub
 		System.out.print("검색하실 제품의 번호를 입력해주세요 >>");
 		int num = sc.nextInt();
-		dao.selectByNum(num);
+		Product p = dao.selectByNum(num);
+		System.out.println(p.toString());
 	}
 
 	@Override
 	public void printAll() {
 		// TODO Auto-generated method stub
 		System.out.println("제품 목록을 출력합니다.");
-		dao.selectAll();
+		Product[] datas = dao.selectAll();
+		
+		for (Product p : datas) {
+			System.out.println(p.toString());
+		}
 	}
 
 	@Override
@@ -43,7 +49,11 @@ public class ServiceImpl_prod implements Service {
 		// TODO Auto-generated method stub
 		System.out.print("검색하실 제품 명을 입력해주세요>>");
 		String name = sc.next();
-		dao.selectByName(name);
+		Product[] datas = dao.selectByName(name);
+		
+		for (Product p : datas) {
+			System.out.println(p.toString());
+		}
 	}
 
 	@Override
@@ -101,12 +111,6 @@ public class ServiceImpl_prod implements Service {
 	public Product[] getAll() {
 		// TODO Auto-generated method stub
 		return dao.selectAll();
-	}
-
-	@Override
-	public Product getByNum(Scanner sc, int num) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

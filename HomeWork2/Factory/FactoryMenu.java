@@ -22,6 +22,7 @@ public class FactoryMenu {
 				service.addProduct(sc);
 				break;
 			case 2:
+				service.printProduct(sc);
 				break;
 			case 3:
 				service.getByName(sc);

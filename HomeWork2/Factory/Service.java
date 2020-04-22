@@ -18,9 +18,7 @@ public interface Service {
 	void out(Scanner sc);
 
 	void delProduct(Scanner sc);
-	
-	Product getByNum(Scanner sc, int num);
-	
+
 	Product[] getAll();
 
 	Product getByNum(int num);

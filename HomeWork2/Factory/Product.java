@@ -20,7 +20,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [num=" + num + ", name=" + name + ", price=" + price + ", amount=" + amount + "]";
+		return "[제품 번호:" + num + " 제품명:" + name + " 가격:" + price + " 수량:" + amount + "]";
 	}
 
 	public int getNum() {
