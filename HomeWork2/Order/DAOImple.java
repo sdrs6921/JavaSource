@@ -31,7 +31,7 @@ public class DAOImple implements DAO {
 	}
 
 	@Override
-	public Order selectBynum(int num) {
+	public Order selectByNum(int num) {
 		// TODO Auto-generated method stub
 		int idx = getIdByNum(num);
 		if (idx >= 0) {

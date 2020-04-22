@@ -7,7 +7,7 @@ public interface DAO {
 
 	int getIdByNum(int num); //주문 번호로 검색 후 배열 위 index 반환
 
-	Order selectBynum(int num); //주문 번호로 검색
+	Order selectByNum(int num); //주문 번호로 검색
 
 	Order[] selectAll(); //전체 검색
 

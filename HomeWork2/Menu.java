@@ -8,6 +8,7 @@ import HomeWork2.Factory.Service;
 import HomeWork2.Factory.ServiceImpl_prod;
 import HomeWork2.Order.OrderMenu;
 import HomeWork2.Order.OrderService;
+import HomeWork2.Order.ServiceImple_order;
 
 public class Menu {
 	private FactoryMenu factoryMenu;
@@ -19,6 +20,8 @@ public class Menu {
 	public Menu() {
 		factoryService = new ServiceImpl_prod(new DAOImple());//Upcasting Àû¿ë
 		factoryMenu = new FactoryMenu(factoryService);
+		orderService = new ServiceImple_order(new HomeWork2.Order.DAOImple());
+		orderMenu = new OrderMenu(orderService);
 	}
 
 	public void run() {
@@ -35,7 +38,7 @@ public class Menu {
 				factoryMenu.run(sc);
 				break;
 			case 2:
-				//TODO - orderMenu.run();
+				orderMenu.run(sc);
 				break;
 			case 3:
 				flag = false;
