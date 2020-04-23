@@ -17,6 +17,20 @@ public class Product {
 		this.price = price;
 		this.amount = amount;
 	}
+	
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if (obj != null && obj instanceof Product) {
+			Product p = (Product)obj;
+			if (num == p.num) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public String toString() {

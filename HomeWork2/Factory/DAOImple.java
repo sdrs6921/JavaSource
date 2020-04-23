@@ -1,5 +1,7 @@
 package HomeWork2.Factory;
 
+import java.util.ArrayList;
+
 import HomeWork2.Factory.Product;
 
 public class DAOImple implements DAO {
@@ -114,6 +116,16 @@ public class DAOImple implements DAO {
 			}
 			cnt--;
 		}
+	}
+	@Override
+	public ArrayList<Product> selectByName2(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ArrayList<Product> selectAll2() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

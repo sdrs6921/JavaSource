@@ -1,5 +1,6 @@
 package HomeWork2.Factory;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ServiceImpl_prod implements Service {
@@ -30,14 +31,18 @@ public class ServiceImpl_prod implements Service {
 		System.out.print("검색하실 제품의 번호를 입력해주세요 >>");
 		int num = sc.nextInt();
 		Product p = dao.selectByNum(num);
-		System.out.println(p.toString());
+		if (p != null) {
+			System.out.println(p.toString());
+		} else {
+			System.out.println("해당 번호의 제품이 존재하지 않습니다.");
+		}
 	}
 
 	@Override
 	public void printAll() {
 		// TODO Auto-generated method stub
 		System.out.println("제품 목록을 출력합니다.");
-		Product[] datas = dao.selectAll();
+		ArrayList<Product> datas = dao.selectAll2();
 		
 		for (Product p : datas) {
 			System.out.println(p.toString());
@@ -49,7 +54,7 @@ public class ServiceImpl_prod implements Service {
 		// TODO Auto-generated method stub
 		System.out.print("검색하실 제품 명을 입력해주세요>>");
 		String name = sc.next();
-		Product[] datas = dao.selectByName(name);
+		ArrayList<Product> datas = dao.selectByName2(name);
 		
 		for (Product p : datas) {
 			System.out.println(p.toString());

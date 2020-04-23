@@ -2,7 +2,7 @@ package HomeWork2;
 
 import java.util.Scanner;
 
-import HomeWork2.Factory.DAOImple;
+import HomeWork2.Factory.DaoImplArrayList;
 import HomeWork2.Factory.FactoryMenu;
 import HomeWork2.Factory.Service;
 import HomeWork2.Factory.ServiceImpl_prod;
@@ -18,7 +18,7 @@ public class Menu {
 	Scanner sc = new Scanner(System.in);
 
 	public Menu() {
-		factoryService = new ServiceImpl_prod(new DAOImple());//Upcasting 적용
+		factoryService = new ServiceImpl_prod(new DaoImplArrayList());//Upcasting 적용
 		factoryMenu = new FactoryMenu(factoryService);
 		orderService = new ServiceImple_order(new HomeWork2.Order.DAOImple());
 		orderMenu = new OrderMenu(orderService);

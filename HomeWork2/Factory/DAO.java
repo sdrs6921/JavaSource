@@ -1,6 +1,6 @@
 package HomeWork2.Factory;
 
-import HomeWork2.Factory.Product;
+import java.util.ArrayList;
 
 public interface DAO {
 	void insert(Product p);
@@ -18,4 +18,8 @@ public interface DAO {
 	boolean in_out(Product p);
 
 	void delete(int num);
+	
+	ArrayList<Product> selectByName2(String name);
+	
+	ArrayList<Product> selectAll2();
 }
