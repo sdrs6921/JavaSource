@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class FactoryMenu {
 	private Service service;
-
-	public FactoryMenu(Service service) {
+	private HomeWork2.Order.Service oService;
+	
+	public FactoryMenu(Service service, HomeWork2.Order.Service o) {
 		this.service = service;
+		this.oService = o;
 	}
 
 	public void run(Scanner sc) {
@@ -39,7 +41,7 @@ public class FactoryMenu {
 			case 7:
 				service.in(sc);
 			case 8:
-				service.out(sc);
+				service.out(oService.getOutList());
 				break;
 			case 9:
 				flag = false;

@@ -1,6 +1,9 @@
 package HomeWork2.Factory;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import HomeWork2.Order.Order;
 
 public interface Service {
 	void addProduct(Scanner sc);
@@ -15,11 +18,11 @@ public interface Service {
 
 	void in(Scanner sc);
 
-	void out(Scanner sc);
+	void out(ArrayList<Order> order);
 
 	void delProduct(Scanner sc);
 
-	Product[] getAll();
+	ArrayList<Product> getAll();
 
 	Product getByNum(int num);
 }

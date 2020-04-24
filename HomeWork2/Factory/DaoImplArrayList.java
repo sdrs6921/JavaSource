@@ -53,7 +53,9 @@ public class DaoImplArrayList implements DAO {
 	public void updatePrice(Product p) {
 		// TODO Auto-generated method stub
 		int idx = datas.indexOf(p);
-		if (idx > 0) {
+		if (idx >= 0) {
+			p.setName(datas.get(idx).getName());
+			p.setAmount(datas.get(idx).getAmount());
 			datas.set(idx, p);
 		} else {
 			System.out.println("해당 제품이 존재하지 않습니다.");
@@ -66,7 +68,7 @@ public class DaoImplArrayList implements DAO {
 		Product p2 = null;
 		int idx = datas.indexOf(p);
 		
-		if (p2 == null) {
+		if (idx < 0) {
 			System.out.println("없는 제품입니다." + p.getName() + " 제품을 취소 합니다.");
 			return false;
 		} else {
@@ -84,6 +86,7 @@ public class DaoImplArrayList implements DAO {
 				System.out.println("수량이 부족합니다.\n"+ p2.getName() +"제품의 출고를 취소합니다.\n");
 				return false;
 			}
+			break;
 		}
 		return true;	
 	}
@@ -103,10 +106,9 @@ public class DaoImplArrayList implements DAO {
 	@Override
 	public ArrayList<Product> selectByName2(String name) {
 		// TODO Auto-generated method stub
-		Product prod = new Product(name, 0, 0);
 		ArrayList<Product> dat = new ArrayList<Product>();
 		for (Product p : datas) {
-			if (prod.equals(p)) {
+			if (p.getName().equals(name)) {
 				dat.add(p);
 			}
 		}

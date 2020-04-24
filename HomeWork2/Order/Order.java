@@ -21,6 +21,19 @@ public class Order {
 		this.amount = amount;
 		this.totalPrice = product.getPrice() * amount;
 	}
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if (obj != null && obj instanceof Order) {
+			Order obj2 = (Order) obj;
+			if (obj2.getNum() == num) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public int getNum() {
 		return num;

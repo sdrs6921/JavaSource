@@ -3,6 +3,8 @@ package HomeWork2.Factory;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import HomeWork2.Order.Order;
+
 public class ServiceImpl_prod implements Service {
 	private DAO dao;
 
@@ -92,9 +94,20 @@ public class ServiceImpl_prod implements Service {
 	}
 
 	@Override
-	public void out(Scanner sc) {
+	public void out(ArrayList<Order> order) {
 		// TODO Auto-generated method stub
-
+		for (Order o : order) {
+			Product p = o.getProduct();
+			Product p2 = new Product();
+			p2.setNum(p2.getNum());
+			p2.setName("out");
+			p2.setAmount(o.getAmount());
+			boolean flag = dao.in_out(p2);
+			
+			if (flag) {
+				o.setReleased(true);
+			}
+		}
 	}
 
 	@Override
@@ -113,9 +126,9 @@ public class ServiceImpl_prod implements Service {
 	}
 
 	@Override
-	public Product[] getAll() {
+	public ArrayList<Product> getAll() {
 		// TODO Auto-generated method stub
-		return dao.selectAll();
+		return dao.selectAll2();
 	}
 
 }

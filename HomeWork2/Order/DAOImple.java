@@ -1,102 +1,85 @@
 package HomeWork2.Order;
 
+import java.util.ArrayList;
+
 public class DAOImple implements DAO {
-	private Order[] datas;
-	private int cnt = 0;
+	private ArrayList<Order> datas;
 
 	public DAOImple() {
-		// TODO Auto-generated constructor stub
-		datas = new Order[30];
+		datas = new ArrayList<Order>();
 	}
 
 	@Override
 	public void insert(Order order) {
 		// TODO Auto-generated method stub
-		if (cnt > 30) {
-			System.out.println("저장 공간이 부족합니다. 주문 접수를 취소합니다.");
-			return;
-		}
-		datas[cnt++] = order;
+		datas.add(order);
 	}
 
 	@Override
 	public int getIdByNum(int num) {
 		// TODO Auto-generated method stub
-		for (int i = 0; i < cnt; i++) {
-			if (datas[i].getNum() == num) {
-				return i;
-			}
-		}
-		return -1;
+		return 0;
 	}
 
 	@Override
 	public Order selectByNum(int num) {
 		// TODO Auto-generated method stub
-		int idx = getIdByNum(num);
-		if (idx >= 0) {
-			return datas[idx];
+		int idx = datas.indexOf(num);
+
+		if (idx < 0) {
+			System.out.println("해당 주문 번호가 존재하지 않습니다.");
+		} else {
+			return datas.get(num);
 		}
+
 		return null;
 	}
 
 	@Override
-	public Order[] selectAll() {
+	public ArrayList<Order> selectAll() {
 		// TODO Auto-generated method stub
-		Order[] x = new Order[cnt];
-		System.arraycopy(datas, 0, x, 0, cnt);
-		return x;
+		return datas;
 	}
 
 	@Override
 	public void delete(int num) {
 		// TODO Auto-generated method stub
-		int idx = getIdByNum(num);
-
-		if (idx < 0) {
-			System.out.println("주문 내용이 없습니다.");
+		if (datas.indexOf(num) < 0) {
+			System.out.println("해당 주문번호가 존재하지 않습니다.");
 		} else {
-			for (int i = idx; i < cnt; i++) {
-				datas[i] = datas[i + 1];
+			if (datas.get(num).isPaid()) {
+				System.out.println("이미 결제한 주문은 취소가 불가능 합니다.");
 			}
-			cnt--;
+			else {
+				datas.remove(num);
+			}
 		}
 	}
 
 	@Override
-	public Order[] selectByPayfalse() {
+	public ArrayList<Order> selectByPayfalse() {
 		// TODO Auto-generated method stub
-		Order[] x = new Order[cnt];
-		int j = 0;
-		for (int i = 0; i < cnt; i++) {
-			if (!datas[i].isPaid()) {
-				x[j++] = datas[i];
+		ArrayList<Order> dat = new ArrayList<Order>();
+		
+		for (Order o : datas) {
+			if (!o.isPaid()) {
+				dat.add(o);
 			}
 		}
-
-		Order[] y = new Order[j];
-		System.arraycopy(x, 0, y, 0, j);
-
-		return y;
+		return dat;
 	}
 
 	@Override
-	public Order[] selectByRelease() {
+	public ArrayList<Order> selectByRelease() {
 		// TODO Auto-generated method stub
-		Order[] x = new Order[cnt];
-		int j = 0;
-
-		for (int i = 0; i < cnt; i++) {
-			if (datas[i].isPaid() && (!datas[i].isReleased())) {
-				x[j++] = datas[i];
+		ArrayList<Order> dat = new ArrayList<Order>();
+		
+		for (Order o : datas) {
+			if (o.isPaid() && (!o.isReleased())) {
+				dat.add(o);
 			}
 		}
-
-		Order[] y = new Order[j];
-
-		System.arraycopy(x, 0, y, 0, j);
-
-		return y;
+		return dat;
 	}
 
 }

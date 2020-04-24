@@ -1,57 +1,99 @@
 package HomeWork2.Order;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ServiceImple_order implements OrderService {
-	private DAO orderDao;
+import HomeWork2.Factory.Product;
+
+public class ServiceImple_order implements Service {
+	private DAO dao;
 	
 	
-	public ServiceImple_order(DAO orderDao) {
-		this.orderDao = orderDao;
+	public ServiceImple_order(DAO dao) {
+		this.dao = dao;
 	}
-	
+
+
 	@Override
-	public void addOrder(Scanner sc) {
+	public void addOrder(Scanner sc, ArrayList<Product> prods) {
 		// TODO Auto-generated method stub
-		System.out.println("주문을 처리합니다.");
-		System.out.print("제품번호:");
-		int num = sc.nextInt();
-		System.out.print("주문수량:");
-		int amount = sc.nextInt();
-		
-		//TODO How To get Factory DAO
-	}
-
-	public void printOrder(Scanner sc) {
-		// TODO Auto-generated method stub
-		System.out.print("검색하실 주문 번호를 입력하시오>>");
-		int num = sc.nextInt();
-		Order order = orderDao.selectByNum(num);
-		System.out.println(order.toString());
-	}
-
-	public void pay(Scanner sc) {
-		// TODO Auto-generated method stub
-		System.out.print("결제 처리할 주문 번호를 입력하시오>>");
-		int num = sc.nextInt();
-		Order order = orderDao.selectByNum(num);
-		if (order == null) {
-			System.out.println("없는 주문 번호입니다.");
-		} else if (order.isPaid()) {
-			System.out.println("이미 결제가 완료되었습니다.");
-		} else {
-			order.setPaid(false);
-			System.out.println("결제 처리가 완료되었습니다.");
+		System.out.println("<<주문 가능한 상품 목록>>");
+		for (Product p : prods) {
+			System.out.println(p);
 		}
 		
+		Product p = null;
 		
+		do {
+			System.out.print("주문할 상품 번호:");
+			int num = sc.nextInt();
+			p = new Product();
+			p.setNum(num);
+		}	while (prods.contains(p));
+		
+		int idx = prods.indexOf(p);
+		p = prods.get(idx);
+		System.out.print("주문 수량:");
+		int q = sc.nextInt();
+		
+		dao.insert(new Order(p, q));
 	}
 
+
+	@Override
+	public void printOrder(Scanner sc) {
+		// TODO Auto-generated method stub
+		ArrayList<Order> datas = dao.selectAll();
+		
+		if (datas.isEmpty()) {
+			System.out.println("등록된 주문이 없습니다.");
+		} else {
+			for (Order o : datas) {
+				System.out.println(o);
+			}
+		}
+	}
+
+
+	@Override
+	public void pay(Scanner sc) {
+		// TODO Auto-generated method stub
+		ArrayList<Order> a1 = dao.selectByPayfalse();
+		
+		System.out.println("<<미결제 주문 목록 출력>>");
+		for (Order o : a1) {
+			System.out.println(o);
+		}
+		
+		System.out.print("결제할 주문 번호 입력>>");
+		int num = sc.nextInt();
+		Order o = dao.selectByNum(num);
+		
+		if (o != null) {
+			o.setPaid(true);
+		} else {
+			System.out.println("없는 주문 번호입니다.");
+		}
+	}
+
+
+	@Override
 	public void delOrder(Scanner sc) {
 		// TODO Auto-generated method stub
-		System.out.print("삭제할 주문 번호를 입력하시오>>");
+		System.out.print("삭제 할 주문 번호 입력>>");
 		int num = sc.nextInt();
-		orderDao.delete(num);
+		dao.delete(num);
 	}
 
+
+	@Override
+	public ArrayList<Order> getOutList() {
+		// TODO Auto-generated method stub
+		return dao.selectByRelease();
+	}
+
+
+
+	
+	
 }

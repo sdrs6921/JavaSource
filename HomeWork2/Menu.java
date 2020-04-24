@@ -6,22 +6,21 @@ import HomeWork2.Factory.DaoImplArrayList;
 import HomeWork2.Factory.FactoryMenu;
 import HomeWork2.Factory.Service;
 import HomeWork2.Factory.ServiceImpl_prod;
+import HomeWork2.Order.DAOImple;
 import HomeWork2.Order.OrderMenu;
-import HomeWork2.Order.OrderService;
-import HomeWork2.Order.ServiceImple_order;
 
 public class Menu {
 	private FactoryMenu factoryMenu;
 	private OrderMenu orderMenu;
 	private Service factoryService;//Interface 타입으로 서비스 구현 객체를 업캐스팅 목적으로 함. 부품 교체를 쉽게 하기 위해
-	private OrderService orderService;
+	private HomeWork2.Order.Service orderService;
 	Scanner sc = new Scanner(System.in);
 
 	public Menu() {
 		factoryService = new ServiceImpl_prod(new DaoImplArrayList());//Upcasting 적용
-		factoryMenu = new FactoryMenu(factoryService);
-		orderService = new ServiceImple_order(new HomeWork2.Order.DAOImple());
-		orderMenu = new OrderMenu(orderService);
+		orderService = new HomeWork2.Order.ServiceImple_order(new DAOImple());
+		factoryMenu = new FactoryMenu(factoryService, orderService);
+		orderMenu = new OrderMenu(orderService, factoryService);
 	}
 
 	public void run() {
