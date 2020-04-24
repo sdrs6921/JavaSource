@@ -92,7 +92,7 @@ public class DAOImple implements DAO {
 				p2.setAmount(p2.getAmount() + p.getAmount());
 				break;
 			case "out":
-				if (p2.getAmount() > p.getAmount()) {
+				if (p2.getAmount() >= p.getAmount()) {
 					p2.setAmount(p2.getAmount() - p.getAmount());
 				} else {
 					System.out.println("수량이 부족합니다.\n"+ p2.getName() +"제품의 출고를 취소합니다.\n");
