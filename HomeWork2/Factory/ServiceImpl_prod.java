@@ -99,7 +99,7 @@ public class ServiceImpl_prod implements Service {
 		for (Order o : order) {
 			Product p = o.getProduct();
 			Product p2 = new Product();
-			p2.setNum(p2.getNum());
+			p2.setNum(p.getNum());
 			p2.setName("out");
 			p2.setAmount(o.getAmount());
 			boolean flag = dao.in_out(p2);
