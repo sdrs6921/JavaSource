@@ -24,14 +24,11 @@ public class DAOImple implements DAO {
 	@Override
 	public Order selectByNum(int num) {
 		// TODO Auto-generated method stub
-		int idx = datas.indexOf(num);
-
-		if (idx < 0) {
-			System.out.println("해당 주문 번호가 존재하지 않습니다.");
-		} else {
-			return datas.get(num);
+		for (Order o : datas) {
+			if (num == o.getNum()) {
+				return o;
+			}
 		}
-
 		return null;
 	}
 
@@ -44,16 +41,18 @@ public class DAOImple implements DAO {
 	@Override
 	public void delete(int num) {
 		// TODO Auto-generated method stub
-		if (datas.indexOf(num) < 0) {
-			System.out.println("해당 주문번호가 존재하지 않습니다.");
-		} else {
-			if (datas.get(num).isPaid()) {
-				System.out.println("이미 결제한 주문은 취소가 불가능 합니다.");
-			}
-			else {
-				datas.remove(num);
+		for (int i = 0; i < datas.size(); i++) {
+			Order o = datas.get(i);
+			if (num == o.getNum()) {
+				if (o.isPaid()) {
+					System.out.println("이미 결제한 주문은 취소불가");
+				} else {
+					datas.remove(i);
+				}
+				return;
 			}
 		}
+		System.out.println("없는 번호. 삭제 취소");
 	}
 
 	@Override
