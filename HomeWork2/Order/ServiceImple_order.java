@@ -29,7 +29,7 @@ public class ServiceImple_order implements Service {
 			int num = sc.nextInt();
 			p = new Product();
 			p.setNum(num);
-		}	while (prods.contains(p));
+		}	while (!prods.contains(p));
 		
 		int idx = prods.indexOf(p);
 		p = prods.get(idx);
