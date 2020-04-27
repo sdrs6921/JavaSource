@@ -1,5 +1,13 @@
 package p0423.address;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,6 +78,61 @@ public class Serviceimpl implements Service {
 		// TODO Auto-generated method stub
 		System.out.print("삭제할 사람의 이름을 입력해주세요 >>");
 		dao.delete(sc.next());
+	}
+
+	@Override
+	public void FileSave() {
+		// TODO Auto-generated method stub
+		//Save all Member
+		ArrayList<Member> datas = dao.selectAll();
+		String path = "src/p0423/address/data/data.dat";
+		
+		try {
+			ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream(path));
+			
+			for (Member m : datas) {
+				oo.writeObject(m);
+			}
+			oo.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void FileLoad() {
+		// TODO Auto-generated method stub
+		String path = "src/p0423/address/data/data.dat";
+		
+		try {
+			FileInputStream fi = new FileInputStream(path);
+			ObjectInputStream oi = new ObjectInputStream(fi);
+			
+			while (fi.available() > 0) {
+				Member m = (Member) oi.readObject();
+				dao.insert((Member) m);
+			}
+			
+			oi.close();
+			fi.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			if (e instanceof EOFException) {
+				System.out.println("읽을 데이터가 없다.");
+			} else {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -12,4 +12,8 @@ public interface Service {
 	void editMember(Scanner sc);
 
 	void delMember(Scanner sc);
+	
+	void FileSave();
+	
+	void FileLoad();
 }

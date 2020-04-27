@@ -1,5 +1,10 @@
 package p0423.address;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Menu {
@@ -12,6 +17,8 @@ public class Menu {
 	public void run(Scanner sc) {
 		boolean flag = true;
 		String menuStr = "원하는 메뉴를 선택해주세요\n1.등록 2.검색 3.수정 4.삭제 5.목록 6.종료 >>";
+		
+		service.FileLoad();
 		
 		while (flag) {
 			System.out.print(menuStr);
@@ -35,6 +42,7 @@ public class Menu {
 				break;
 			case 6:
 				flag = false;
+				service.FileSave();
 				break;
 			}
 		}
